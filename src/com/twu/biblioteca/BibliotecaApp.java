@@ -6,13 +6,13 @@ import java.util.Scanner;
 public class BibliotecaApp {
     ArrayList<Book> bookList = new ArrayList<Book>();
     private void setUpBooks() {
-        bookList.add(new Book("Crime and Punishment"));
-        bookList.add(new Book("Catcher in the Rye"));
-        bookList.add(new Book("To Kill a Mockingbird"));
+        bookList.add(new Book("Crime and Punishment", "Fyodor Dostoevsky", 1866));
+        bookList.add(new Book("Catcher in the Rye", "J. D. Salinger", 1951));
+        bookList.add(new Book("To Kill a Mockingbird", "Harper Lee", 1960));
     }
     public void displayBooks() {
         for (Book book: this.bookList) {
-            System.out.println(book.title);
+            book.toString();
         }
     }
     public void showMenu() {
