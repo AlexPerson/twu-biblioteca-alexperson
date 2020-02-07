@@ -32,7 +32,7 @@ public class BibliotecaApp {
                 displayBooks();
                 break;
             default:
-                System.out.println("Error: " + option + " is not a valid option!");
+                System.out.println("Please select a valid option!");
         }
     }
     public static void main(String[] args) {
