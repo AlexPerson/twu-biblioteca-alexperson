@@ -5,11 +5,17 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
     ArrayList<Book> bookList = new ArrayList<Book>();
+    ArrayList<Movie> movieList = new ArrayList<Movie>();
 
     public void setUpBooks() {
         bookList.add(new Book("Crime and Punishment", "Fyodor Dostoevsky", 1866));
         bookList.add(new Book("Catcher in the Rye", "J. D. Salinger", 1951));
         bookList.add(new Book("To Kill a Mockingbird", "Harper Lee", 1960));
+    }
+    public void setUpMovies() {
+        movieList.add(new Movie("The Dark Knight", 2008, "Christopher Nolan", 9));
+        movieList.add(new Movie("The Matrix", 1999, "Lana/Lilly Wachowski", 8));
+        movieList.add(new Movie("Aliens", 1986, "James Cameron", 7));
     }
     public void displayBooksInStock() {
         String bookString = "";
@@ -29,12 +35,22 @@ public class BibliotecaApp {
         }
         System.out.println(bookString);
     }
+    public void displayMoviesInStock() {
+        String movieString = "";
+        for (Movie movie: this.movieList) {
+            if (movie.inStock) {
+                movieString += movie.toString() + '\n';
+            }
+        }
+        System.out.println(movieString);
+    }
     public void showMenu() {
         System.out.println("\nSelect an option from the menu below:\n");
         System.out.println("1) List of Books");
         System.out.println("2) Checkout Book");
         System.out.println("3) Return Book");
-        System.out.println("4) Exit");
+        System.out.println("4) List of Movies");
+        System.out.println("5) Exit");
     }
     public int getUserInput() {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
@@ -54,6 +70,7 @@ public class BibliotecaApp {
         System.out.println("Welcome to Biblioteca. Your one-stop-shop for great books in Bangalore!");
         BibliotecaApp app = new BibliotecaApp();
         app.setUpBooks();
+        app.setUpMovies();
         app.showMenu();
         while (true) {
             int option = app.getUserInput();
@@ -73,6 +90,9 @@ public class BibliotecaApp {
                     app.returnBook(app.getUserInputAsString());
                     break;
                 case 4:
+                    app.displayMoviesInStock();
+                    break;
+                case 5:
                     return;
                 default:
                     System.out.println("Please select a valid option!");
