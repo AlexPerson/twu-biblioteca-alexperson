@@ -19,6 +19,10 @@ public class Movie {
         this.inStock = false;
     }
 
+    public void returnMovie() {
+        this.inStock = true;
+    }
+
     @Override
     public String toString() {
         return name + " || " + year + " || " + director + " || " + movieRating;
