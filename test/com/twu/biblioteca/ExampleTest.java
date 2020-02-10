@@ -51,5 +51,12 @@ public class ExampleTest {
         assertTrue(selectedBook.inStock);
     }
 
-
+    @Test
+    public void individualMoviesMayBeCheckedOut() {
+        BibliotecaApp app = new BibliotecaApp();
+        app.setUpMovies();
+        Movie selectedMovie = app.movieList.get(0);
+        selectedMovie.checkOut();
+        assertFalse(selectedMovie.inStock);
+    }
 }
