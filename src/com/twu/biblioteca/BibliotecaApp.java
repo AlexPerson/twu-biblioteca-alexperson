@@ -1,11 +1,14 @@
 package com.twu.biblioteca;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BibliotecaApp {
     ArrayList<Book> bookList = new ArrayList<Book>();
     ArrayList<Movie> movieList = new ArrayList<Movie>();
+    ArrayList<User> userList = new ArrayList<User>();
+    User currentUser = null;
 
     public void setUpBooks() {
         bookList.add(new Book("Crime and Punishment", "Fyodor Dostoevsky", 1866));
@@ -16,6 +19,9 @@ public class BibliotecaApp {
         movieList.add(new Movie("The Dark Knight", 2008, "Christopher Nolan", 9));
         movieList.add(new Movie("The Matrix", 1999, "Lana/Lilly Wachowski", 8));
         movieList.add(new Movie("Aliens", 1986, "James Cameron", 7));
+    }
+    public void setUpUsers() {
+        userList.add(new User("123-4567", "boom"));
     }
     public void displayBooksInStock() {
         String bookString = "";
@@ -71,6 +77,25 @@ public class BibliotecaApp {
         BibliotecaApp app = new BibliotecaApp();
         app.setUpBooks();
         app.setUpMovies();
+        app.setUpUsers();
+        while (app.currentUser == null) {
+            System.out.println("Login to check-out or return books.");
+            System.out.println("Library Number:\n");
+            String libNumber = app.getUserInputAsString();
+            for (User user: app.userList) {
+                if (user.libraryNumber.equals(libNumber)) {
+                    System.out.println("Found User: " + libNumber);
+                    System.out.println("Password:\n");
+                    String pw = app.getUserInputAsString();
+                    if (user.password.equals(pw)) {
+                        app.currentUser = user;
+                        System.out.println("Login successful!");
+                    } else
+                        System.out.println("Incorrect password! Login failed!");
+                } else
+                    System.out.println("Invalid Library Number! Login failed!");
+            }
+        }
         app.showMenu();
         while (true) {
             int option = app.getUserInput();
