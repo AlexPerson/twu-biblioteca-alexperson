@@ -9,8 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class ExampleTest {
 
@@ -31,5 +30,24 @@ public class ExampleTest {
         Book selectedBook = app.checkoutBook("Crime and Punishment");
         app.displayBooksInStock();
         assertFalse(selectedBook.inStock);
+    }
+
+    @Test
+    public void individualBooksMayBeReturned() {
+        BibliotecaApp app = new BibliotecaApp();
+        app.setUpBooks();
+        Book selectedBook = app.bookList.get(0);
+        selectedBook.checkOut();
+        selectedBook.returnBook();
+        assertTrue(selectedBook.inStock);
+    }
+
+    @Test
+    public void userCanSelectABookToReturnBasedOnTitle() {
+        BibliotecaApp app = new BibliotecaApp();
+        app.setUpBooks();
+        Book selectedBook = app.checkoutBook("Crime and Punishment");
+        app.returnBook(selectedBook.title);
+        assertTrue(selectedBook.inStock);
     }
 }

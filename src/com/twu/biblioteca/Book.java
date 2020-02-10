@@ -17,6 +17,10 @@ public class Book {
         this.inStock = false;
     }
 
+    public void returnBook() {
+        this.inStock = true;
+    }
+
     @Override
     public String toString() {
         return title + " || " + author + " || " + pubYear;

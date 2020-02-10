@@ -17,7 +17,15 @@ public class BibliotecaApp {
             if (book.inStock) {
                 bookString += book.toString() + '\n';
             }
-
+        }
+        System.out.println(bookString);
+    }
+    public void displayBooksCheckedOut() {
+        String bookString = "";
+        for (Book book: this.bookList) {
+            if (!book.inStock) {
+                bookString += book.toString() + '\n';
+            }
         }
         System.out.println(bookString);
     }
@@ -25,7 +33,8 @@ public class BibliotecaApp {
         System.out.println("\nSelect an option from the menu below:\n");
         System.out.println("1) List of Books");
         System.out.println("2) Checkout Book");
-        System.out.println("3) Exit");
+        System.out.println("3) Return Book");
+        System.out.println("4) Exit");
     }
     public int getUserInput() {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
@@ -59,6 +68,11 @@ public class BibliotecaApp {
                     app.checkoutBook(test);
                     break;
                 case 3:
+                    app.displayBooksCheckedOut();
+                    System.out.println("Enter a books title to return:");
+                    app.returnBook(app.getUserInputAsString());
+                    break;
+                case 4:
                     return;
                 default:
                     System.out.println("Please select a valid option!");
@@ -76,6 +90,18 @@ public class BibliotecaApp {
             }
         }
         System.out.println("Sorry, that book is not available");
+        return null;
+    }
+
+    public Book returnBook(String title) {
+        for (Book book: bookList) {
+            if (book.title.equals(title)) {
+                book.returnBook();
+                System.out.println("Thank you for returning the book");
+                return book;
+            }
+        }
+        System.out.println("That is not a valid book to return.");
         return null;
     }
 }
